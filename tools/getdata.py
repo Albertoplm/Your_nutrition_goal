@@ -1,4 +1,38 @@
-from configuration import db, collection
+from configuration import db, collection, collection2
+
+
+def añadir_comdias_dia_total(usuario, alimentos_dia):
+    """
+    Function that returns all authors from the database
+    """
+    meal = alimentos_dia
+    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"meal": meal}}, upsert=False) 
+    return x
+
+
+def añadir_usuario(usuario, contraseña):
+    """
+    Function that returns all authors from the database
+    """
+    mydict = {"nombre": usuario, "contraseña": contraseña}
+    x = collection2.insert_one(mydict)
+    return "Useruario añadido"
+
+def iniciar_sesion(usuario, contraseña):
+    """
+    Function that returns all authors from the database
+    """
+    query = {"nombre": usuario, "contraseña": contraseña}
+    informacion_usuario = list(collection2.find(query, {"_id": 0}))
+    return informacion_usuario
+
+def ver_usuarios():
+    """
+    Function that returns all authors from the database
+    """
+    query = {}
+    usuarios = list(collection2.find(query, {"_id": 0}))
+    return usuarios
 
 
 def nombre_alimentos():
@@ -25,108 +59,4 @@ def buscar_alimento_usuario(alimento):
     """
     query = {"Nombre": alimento}
     food = list(collection.find(query, {"_id": 0, "Name": 0}))
-    return food
-
-def buscar_alimentos(nombre):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Nombre": {"$regex":f"{nombre}"} and {"$regex":f"{nombre.capitalize()}"}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_kcal(kcal):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": kcal}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_kcalup(kcal):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$gte": kcal}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_kcallow(kcal):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$lte": kcal}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_grasas(grasa):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": grasa}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_grasasup(grasa):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$gte": grasas}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_grasaslow(grasa):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$lte": grasas}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_proteina(proteina):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": proteina}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_proteinaup(proteina):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$gte":proteina}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_proteinalow(proteina):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$lte":proteina}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_carbohidratos(carbohidratos):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": carbohidratos}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_carbohidratosup(carbohidratos):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$gte":carbohidratos}}
-    food = list(collection.find((query)))
-    return food
-
-def buscar_carbohidratoslow(carbohidratos):
-    """
-    Function that returns all authors from the database
-    """
-    query = {"Energia(kcal)": {"$lte":carbohidratos}}
-    food = list(collection.find((query)))
     return food
