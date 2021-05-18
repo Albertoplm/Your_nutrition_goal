@@ -75,10 +75,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos?', 0, 500)
                         p_gr= gr/100
                         des1 = pd.DataFrame(get.buscar_alimento_usuario(desayuno1))
-                        des1["Energia(kcal)"] = des1["Energia(kcal)"] * p_gr
-                        des1["Grasas"] = des1["Grasas"] * p_gr
-                        des1["Proteina"] = des1["Proteina"] * p_gr
-                        des1["Carbohidratos"] = des1["Carbohidratos"] * p_gr
+                        des1 = funciones.alimentos_gr(des1, p_gr)
                         st.write(des1)
 
 
@@ -91,10 +88,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento?', 0, 500)
                         p_gr= gr/100
                         des2 = pd.DataFrame(get.buscar_alimento_usuario(desayuno2))
-                        des2["Energia(kcal)"] = des2["Energia(kcal)"] * p_gr
-                        des2["Grasas"] = des2["Grasas"] * p_gr
-                        des2["Proteina"] = des2["Proteina"] * p_gr
-                        des2["Carbohidratos"] = des2["Carbohidratos"] * p_gr
+                        des2 = funciones.alimentos_gr(des2, p_gr)
                         st.write(des2)
 
 
@@ -106,10 +100,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento?', 0, 500)
                         p_gr= gr/100
                         des3 = pd.DataFrame(get.buscar_alimento_usuario(desayuno3))
-                        des3["Energia(kcal)"] = des3["Energia(kcal)"] * p_gr
-                        des3["Grasas"] = des3["Grasas"] * p_gr
-                        des3["Proteina"] = des3["Proteina"] * p_gr
-                        des3["Carbohidratos"] = des3["Carbohidratos"] * p_gr
+                        des3 = funciones.alimentos_gr(des3, p_gr)
                         st.write(des3)
 
                     if linea_desayuno == "+4" or linea_desayuno == "+5":
@@ -120,10 +111,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento?', 0, 500)
                         p_gr= gr/100
                         des4 = pd.DataFrame(get.buscar_alimento_usuario(desayuno4))
-                        des4["Energia(kcal)"] = des4["Energia(kcal)"] * p_gr
-                        des4["Grasas"] = des4["Grasas"] * p_gr
-                        des4["Proteina"] = des4["Proteina"] * p_gr
-                        des4["Carbohidratos"] = des4["Carbohidratos"] * p_gr
+                        des4 = funciones.alimentos_gr(des4, p_gr)
                         st.write(des4)
 
                     if linea_desayuno == "+5":
@@ -134,10 +122,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento?', 0, 500)
                         p_gr= gr/100
                         des5 = pd.DataFrame(get.buscar_alimento_usuario(desayuno5))
-                        des5["Energia(kcal)"] = des5["Energia(kcal)"] * p_gr
-                        des5["Grasas"] = des5["Grasas"] * p_gr
-                        des5["Proteina"] = des5["Proteina"] * p_gr
-                        des5["Carbohidratos"] = des5["Carbohidratos"] * p_gr
+                        des5 = funciones.alimentos_gr(des5, p_gr)
                         st.write(des5)
                     
 
@@ -177,10 +162,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la comida?', 0, 500)
                         p_gr= gr/100
                         com1 = pd.DataFrame(get.buscar_alimento_usuario(comida1))
-                        com1["Energia(kcal)"] = com1["Energia(kcal)"] * p_gr
-                        com1["Grasas"] = com1["Grasas"] * p_gr
-                        com1["Proteina"] = com1["Proteina"] * p_gr
-                        com1["Carbohidratos"] = com1["Carbohidratos"] * p_gr
+                        com1 = funciones.alimentos_gr(com1, p_gr)
                         st.write(com1)
 
 
@@ -193,10 +175,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la comida?', 0, 500)
                         p_gr= gr/100
                         com2 = pd.DataFrame(get.buscar_alimento_usuario(comida2))
-                        com2["Energia(kcal)"] = com2["Energia(kcal)"] * p_gr
-                        com2["Grasas"] = com2["Grasas"] * p_gr
-                        com2["Proteina"] = com2["Proteina"] * p_gr
-                        com2["Carbohidratos"] = com2["Carbohidratos"] * p_gr
+                        com2 = funciones.alimentos_gr(com2, p_gr)
                         st.write(com2)
 
 
@@ -208,10 +187,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la comida?', 0, 500)
                         p_gr= gr/100
                         com3 = pd.DataFrame(get.buscar_alimento_usuario(comida3))
-                        com3["Energia(kcal)"] = com3["Energia(kcal)"] * p_gr
-                        com3["Grasas"] = com3["Grasas"] * p_gr
-                        com3["Proteina"] = com3["Proteina"] * p_gr
-                        com3["Carbohidratos"] = com3["Carbohidratos"] * p_gr
+                        com3 = funciones.alimentos_gr(com3, p_gr)
                         st.write(com3)
 
                     if linea_comida == "+4" or linea_comida == "+5":
@@ -222,10 +198,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la comida?', 0, 500)
                         p_gr= gr/100
                         com4 = pd.DataFrame(get.buscar_alimento_usuario(comida4))
-                        com4["Energia(kcal)"] = com4["Energia(kcal)"] * p_gr
-                        com4["Grasas"] = com4["Grasas"] * p_gr
-                        com4["Proteina"] = com4["Proteina"] * p_gr
-                        com4["Carbohidratos"] = com4["Carbohidratos"] * p_gr
+                        com4 = funciones.alimentos_gr(com4, p_gr)
                         st.write(com4)
 
                     if linea_comida == "+5":
@@ -236,10 +209,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la comida?', 0, 500)
                         p_gr= gr/100
                         com5 = pd.DataFrame(get.buscar_alimento_usuario(comida5))
-                        com5["Energia(kcal)"] = com5["Energia(kcal)"] * p_gr
-                        com5["Grasas"] = com5["Grasas"] * p_gr
-                        com5["Proteina"] = com5["Proteina"] * p_gr
-                        com5["Carbohidratos"] = com5["Carbohidratos"] * p_gr
+                        com5 = funciones.alimentos_gr(com5, p_gr)
                         st.write(com5)
 
                     if linea_comida != "0":
@@ -255,7 +225,9 @@ if menu_choice == "Login":
                 #CENA
 
                 st.subheader("Cena")
+                
                 if st.checkbox("¿Quieres añadir alimentos para la cena?"):
+                    
                     mas = ["0","+1", "+2", "+3", "+4", "+5"]
                     linea_cena = st.radio(
                         '¿Cuantos alimentos deseas añadir a la cena?',
@@ -267,7 +239,7 @@ if menu_choice == "Login":
                     cena3 = 0 
                     cena4 = 0 
                     cena5 = 0
-
+                
 
                     if linea_cena == "+1" or linea_cena == "+2" or linea_cena == "+3" or linea_cena == "+4" or linea_cena == "+5":
                         cena1 = st.selectbox(
@@ -277,10 +249,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la cena?', 0, 500)
                         p_gr= gr/100
                         cen1 = pd.DataFrame(get.buscar_alimento_usuario(cena1))
-                        cen1["Energia(kcal)"] = cen1["Energia(kcal)"] * p_gr
-                        cen1["Grasas"] = cen1["Grasas"] * p_gr
-                        cen1["Proteina"] = cen1["Proteina"] * p_gr
-                        cen1["Carbohidratos"] = cen1["Carbohidratos"] * p_gr
+                        cen1 = funciones.alimentos_gr(cen1, p_gr)
                         st.write(cen1)
 
 
@@ -293,10 +262,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la cena?', 0, 500)
                         p_gr= gr/100
                         cen2 = pd.DataFrame(get.buscar_alimento_usuario(cena2))
-                        cen2["Energia(kcal)"] = cen2["Energia(kcal)"] * p_gr
-                        cen2["Grasas"] = cen2["Grasas"] * p_gr
-                        cen2["Proteina"] = cen2["Proteina"] * p_gr
-                        cen2["Carbohidratos"] = cen2["Carbohidratos"] * p_gr
+                        cen2 = funciones.alimentos_gr(cen2, p_gr)
                         st.write(cen2)
 
 
@@ -308,10 +274,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la cena?', 0, 500)
                         p_gr= gr/100
                         cen3 = pd.DataFrame(get.buscar_alimento_usuario(cena3))
-                        cen3["Energia(kcal)"] = cen3["Energia(kcal)"] * p_gr
-                        cen3["Grasas"] = cen3["Grasas"] * p_gr
-                        cen3["Proteina"] = cen3["Proteina"] * p_gr
-                        cen3["Carbohidratos"] = cen3["Carbohidratos"] * p_gr
+                        cen3 = funciones.alimentos_gr(cen3, p_gr)
                         st.write(cen3)
 
                     if linea_cena == "+4" or linea_cena == "+5":
@@ -322,10 +285,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la cena?', 0, 500)
                         p_gr= gr/100
                         cen4 = pd.DataFrame(get.buscar_alimento_usuario(cena4))
-                        cen4["Energia(kcal)"] = cen4["Energia(kcal)"] * p_gr
-                        cen4["Grasas"] = cen4["Grasas"] * p_gr
-                        cen4["Proteina"] = cen4["Proteina"] * p_gr
-                        cen4["Carbohidratos"] = cen4["Carbohidratos"] * p_gr
+                        cen4 = funciones.alimentos_gr(cen4, p_gr)
                         st.write(cen4)
 
                     if linea_cena == "+5":
@@ -336,10 +296,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la cena?', 0, 500)
                         p_gr= gr/100
                         cen5 = pd.DataFrame(get.buscar_alimento_usuario(cena5))
-                        cen5["Energia(kcal)"] = cen5["Energia(kcal)"] * p_gr
-                        cen5["Grasas"] = cen5["Grasas"] * p_gr
-                        cen5["Proteina"] = cen5["Proteina"] * p_gr
-                        cen5["Carbohidratos"] = cen5["Carbohidratos"] * p_gr
+                        cen5 = funciones.alimentos_gr(cen5, p_gr)
                         st.write(cen5)
 
                     if linea_cena != "0":
@@ -377,10 +334,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en para este alimento de otros?', 0, 500)
                         p_gr= gr/100
                         otr1 = pd.DataFrame(get.buscar_alimento_usuario(otros1))
-                        otr1["Energia(kcal)"] = otr1["Energia(kcal)"] * p_gr
-                        otr1["Grasas"] = otr1["Grasas"] * p_gr
-                        otr1["Proteina"] = otr1["Proteina"] * p_gr
-                        otr1["Carbohidratos"] = otr1["Carbohidratos"] * p_gr
+                        otr1 = funciones.alimentos_gr(otr1, p_gr)
                         st.write(otr1)
 
 
@@ -393,10 +347,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de otros?', 0, 500)
                         p_gr= gr/100
                         otr2 = pd.DataFrame(get.buscar_alimento_usuario(otros2))
-                        otr2["Energia(kcal)"] = otr2["Energia(kcal)"] * p_gr
-                        otr2["Grasas"] = otr2["Grasas"] * p_gr
-                        otr2["Proteina"] = otr2["Proteina"] * p_gr
-                        otr2["Carbohidratos"] = otr2["Carbohidratos"] * p_gr
+                        otr2 = funciones.alimentos_gr(otr2, p_gr)
                         st.write(otr2)
 
 
@@ -408,10 +359,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de otros?', 0, 500)
                         p_gr= gr/100
                         otr3 = pd.DataFrame(get.buscar_alimento_usuario(otros3))
-                        otr2["Energia(kcal)"] = otr2["Energia(kcal)"] * p_gr
-                        otr2["Grasas"] = otr2["Grasas"] * p_gr
-                        otr2["Proteina"] = otr2["Proteina"] * p_gr
-                        otr2["Carbohidratos"] = otr2["Carbohidratos"] * p_gr
+                        otr3 = funciones.alimentos_gr(otr3, p_gr)
                         st.write(otr2)
 
                     if linea_otros == "+4" or linea_otros == "+5":
@@ -422,10 +370,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de otros?', 0, 500)
                         p_gr= gr/100
                         otr4 = pd.DataFrame(get.buscar_alimento_usuario(otros4))
-                        otr4["Energia(kcal)"] = otr4["Energia(kcal)"] * p_gr
-                        otr4["Grasas"] = otr4["Grasas"] * p_gr
-                        otr4["Proteina"] = otr4["Proteina"] * p_gr
-                        otr4["Carbohidratos"] = otr4["Carbohidratos"] * p_gr
+                        otr4 = funciones.alimentos_gr(otr4, p_gr)
                         st.write(otr4)
 
                     if linea_otros == "+5":
@@ -436,10 +381,7 @@ if menu_choice == "Login":
                         gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de otros?', 0, 500)
                         p_gr= gr/100
                         otr5 = pd.DataFrame(get.buscar_alimento_usuario(otros5))
-                        otr5["Energia(kcal)"] = otr5["Energia(kcal)"] * p_gr
-                        otr5["Grasas"] = otr5["Grasas"] * p_gr
-                        otr5["Proteina"] = otr5["Proteina"] * p_gr
-                        otr5["Carbohidratos"] = otr5["Carbohidratos"] * p_gr
+                        otr5 = funciones.alimentos_gr(otr5, p_gr)
                         st.write(otr5)
 
                     if linea_otros != "0":
@@ -483,7 +425,7 @@ if menu_choice == "Login":
 
                 st.subheader("Evolución de tu peso:")
                 evolucion_peso = get.evolucion_peso(username)
-                st.area_chart(data=evolucion_peso)
+                st.bar_chart(data=evolucion_peso)
                 st.subheader("Gráfico perdidas y ganancias de peso:")
                 evolucion_PyG = get.evolucion_PyG(username)
                 st.bar_chart(data=evolucion_PyG)
@@ -499,9 +441,16 @@ if menu_choice == "Login":
 
             elif task == ("Perfil"):
                 st.subheader("Perfil del usuario")
-                user_result = get.iniciar_sesion(username, password)
+                user_result = get.informacion_sesion(username, password)
                 user_info = pd.DataFrame(user_result)
                 st.write(user_info)
+                st.write("¿Quieres cambiar la contraseña?")
+                new_password = st.text_input("Nueva contraseña",type= 'password')
+                new_password2 = st.text_input("Confirma tu nueva contraseña",type= 'password')
+                if new_password == new_password2:
+                    if st.checkbox("Confirmar nueva contraseña"):
+                        get.change_password(username, new_password)
+                        st.write("Tu contraseña se cambio correctamente")
         else:
             st.warning("Incorrect Username/Password")
 if menu_choice == "SignUp":
@@ -672,10 +621,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos?', 0, 500)
             p_gr= gr/100
             des1 = pd.DataFrame(get.buscar_alimento_usuario(desayuno1))
-            des1["Energia(kcal)"] = des1["Energia(kcal)"] * p_gr
-            des1["Grasas"] = des1["Grasas"] * p_gr
-            des1["Proteina"] = des1["Proteina"] * p_gr
-            des1["Carbohidratos"] = des1["Carbohidratos"] * p_gr
+            des1 = funciones.alimentos_gr(des1, p_gr)
             st.write(des1)
 
 
@@ -688,10 +634,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento?', 0, 500)
             p_gr= gr/100
             des2 = pd.DataFrame(get.buscar_alimento_usuario(desayuno2))
-            des2["Energia(kcal)"] = des2["Energia(kcal)"] * p_gr
-            des2["Grasas"] = des2["Grasas"] * p_gr
-            des2["Proteina"] = des2["Proteina"] * p_gr
-            des2["Carbohidratos"] = des2["Carbohidratos"] * p_gr
+            des2 = funciones.alimentos_gr(des2, p_gr)
             st.write(des2)
 
 
@@ -703,10 +646,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento?', 0, 500)
             p_gr= gr/100
             des3 = pd.DataFrame(get.buscar_alimento_usuario(desayuno3))
-            des3["Energia(kcal)"] = des3["Energia(kcal)"] * p_gr
-            des3["Grasas"] = des3["Grasas"] * p_gr
-            des3["Proteina"] = des3["Proteina"] * p_gr
-            des3["Carbohidratos"] = des3["Carbohidratos"] * p_gr
+            des3 = funciones.alimentos_gr(des3, p_gr)
             st.write(des3)
 
         if linea_desayuno == "+4" or linea_desayuno == "+5":
@@ -717,10 +657,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento?', 0, 500)
             p_gr= gr/100
             des4 = pd.DataFrame(get.buscar_alimento_usuario(desayuno4))
-            des4["Energia(kcal)"] = des4["Energia(kcal)"] * p_gr
-            des4["Grasas"] = des4["Grasas"] * p_gr
-            des4["Proteina"] = des4["Proteina"] * p_gr
-            des4["Carbohidratos"] = des4["Carbohidratos"] * p_gr
+            des4 = funciones.alimentos_gr(des4, p_gr)
             st.write(des4)
 
         if linea_desayuno == "+5":
@@ -731,10 +668,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento?', 0, 500)
             p_gr= gr/100
             des5 = pd.DataFrame(get.buscar_alimento_usuario(desayuno5))
-            des5["Energia(kcal)"] = des5["Energia(kcal)"] * p_gr
-            des5["Grasas"] = des5["Grasas"] * p_gr
-            des5["Proteina"] = des5["Proteina"] * p_gr
-            des5["Carbohidratos"] = des5["Carbohidratos"] * p_gr
+            des5 = funciones.alimentos_gr(des5, p_gr)
             st.write(des5)
         
 
@@ -774,10 +708,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la comida?', 0, 500)
             p_gr= gr/100
             com1 = pd.DataFrame(get.buscar_alimento_usuario(comida1))
-            com1["Energia(kcal)"] = com1["Energia(kcal)"] * p_gr
-            com1["Grasas"] = com1["Grasas"] * p_gr
-            com1["Proteina"] = com1["Proteina"] * p_gr
-            com1["Carbohidratos"] = com1["Carbohidratos"] * p_gr
+            com1 = funciones.alimentos_gr(com1, p_gr)
             st.write(com1)
 
 
@@ -790,10 +721,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la comida?', 0, 500)
             p_gr= gr/100
             com2 = pd.DataFrame(get.buscar_alimento_usuario(comida2))
-            com2["Energia(kcal)"] = com2["Energia(kcal)"] * p_gr
-            com2["Grasas"] = com2["Grasas"] * p_gr
-            com2["Proteina"] = com2["Proteina"] * p_gr
-            com2["Carbohidratos"] = com2["Carbohidratos"] * p_gr
+            com2 = funciones.alimentos_gr(com2, p_gr)
             st.write(com2)
 
 
@@ -805,10 +733,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la comida?', 0, 500)
             p_gr= gr/100
             com3 = pd.DataFrame(get.buscar_alimento_usuario(comida3))
-            com3["Energia(kcal)"] = com3["Energia(kcal)"] * p_gr
-            com3["Grasas"] = com3["Grasas"] * p_gr
-            com3["Proteina"] = com3["Proteina"] * p_gr
-            com3["Carbohidratos"] = com3["Carbohidratos"] * p_gr
+            com3 = funciones.alimentos_gr(com3, p_gr)
             st.write(com3)
 
         if linea_comida == "+4" or linea_comida == "+5":
@@ -819,10 +744,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la comida?', 0, 500)
             p_gr= gr/100
             com4 = pd.DataFrame(get.buscar_alimento_usuario(comida4))
-            com4["Energia(kcal)"] = com4["Energia(kcal)"] * p_gr
-            com4["Grasas"] = com4["Grasas"] * p_gr
-            com4["Proteina"] = com4["Proteina"] * p_gr
-            com4["Carbohidratos"] = com4["Carbohidratos"] * p_gr
+            com4 = funciones.alimentos_gr(com4, p_gr)
             st.write(com4)
 
         if linea_comida == "+5":
@@ -833,10 +755,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la comida?', 0, 500)
             p_gr= gr/100
             com5 = pd.DataFrame(get.buscar_alimento_usuario(comida5))
-            com5["Energia(kcal)"] = com5["Energia(kcal)"] * p_gr
-            com5["Grasas"] = com5["Grasas"] * p_gr
-            com5["Proteina"] = com5["Proteina"] * p_gr
-            com5["Carbohidratos"] = com5["Carbohidratos"] * p_gr
+            com5 = funciones.alimentos_gr(com5, p_gr)
             st.write(com5)
 
         if linea_comida != "0":
@@ -876,10 +795,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen1 = pd.DataFrame(get.buscar_alimento_usuario(cena1))
-            cen1["Energia(kcal)"] = cen1["Energia(kcal)"] * p_gr
-            cen1["Grasas"] = cen1["Grasas"] * p_gr
-            cen1["Proteina"] = cen1["Proteina"] * p_gr
-            cen1["Carbohidratos"] = cen1["Carbohidratos"] * p_gr
+            cen1 = funciones.alimentos_gr(cen1, p_gr)
             st.write(cen1)
 
 
@@ -892,10 +808,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen2 = pd.DataFrame(get.buscar_alimento_usuario(cena2))
-            cen2["Energia(kcal)"] = cen2["Energia(kcal)"] * p_gr
-            cen2["Grasas"] = cen2["Grasas"] * p_gr
-            cen2["Proteina"] = cen2["Proteina"] * p_gr
-            cen2["Carbohidratos"] = cen2["Carbohidratos"] * p_gr
+            cen2 = funciones.alimentos_gr(cen2, p_gr)
             st.write(cen2)
 
 
@@ -907,10 +820,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen3 = pd.DataFrame(get.buscar_alimento_usuario(cena3))
-            cen3["Energia(kcal)"] = cen3["Energia(kcal)"] * p_gr
-            cen3["Grasas"] = cen3["Grasas"] * p_gr
-            cen3["Proteina"] = cen3["Proteina"] * p_gr
-            cen3["Carbohidratos"] = cen3["Carbohidratos"] * p_gr
+            cen3 = funciones.alimentos_gr(cen3, p_gr)
             st.write(cen3)
 
         if linea_cena == "+4" or linea_cena == "+5":
@@ -921,10 +831,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen4 = pd.DataFrame(get.buscar_alimento_usuario(cena4))
-            cen4["Energia(kcal)"] = cen4["Energia(kcal)"] * p_gr
-            cen4["Grasas"] = cen4["Grasas"] * p_gr
-            cen4["Proteina"] = cen4["Proteina"] * p_gr
-            cen4["Carbohidratos"] = cen4["Carbohidratos"] * p_gr
+            cen4 = funciones.alimentos_gr(cen4, p_gr)
             st.write(cen4)
 
         if linea_cena == "+5":
@@ -935,10 +842,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen5 = pd.DataFrame(get.buscar_alimento_usuario(cena5))
-            cen5["Energia(kcal)"] = cen5["Energia(kcal)"] * p_gr
-            cen5["Grasas"] = cen5["Grasas"] * p_gr
-            cen5["Proteina"] = cen5["Proteina"] * p_gr
-            cen5["Carbohidratos"] = cen5["Carbohidratos"] * p_gr
+            cen5 = funciones.alimentos_gr(cen5, p_gr)
             st.write(cen5)
 
         if linea_cena != "0":
@@ -976,10 +880,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en para este alimento de otros?', 0, 500)
             p_gr= gr/100
             otr1 = pd.DataFrame(get.buscar_alimento_usuario(otros1))
-            otr1["Energia(kcal)"] = otr1["Energia(kcal)"] * p_gr
-            otr1["Grasas"] = otr1["Grasas"] * p_gr
-            otr1["Proteina"] = otr1["Proteina"] * p_gr
-            otr1["Carbohidratos"] = otr1["Carbohidratos"] * p_gr
+            otr1 = funciones.alimentos_gr(otr1, p_gr)
             st.write(otr1)
 
 
@@ -992,10 +893,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de otros?', 0, 500)
             p_gr= gr/100
             otr2 = pd.DataFrame(get.buscar_alimento_usuario(otros2))
-            otr2["Energia(kcal)"] = otr2["Energia(kcal)"] * p_gr
-            otr2["Grasas"] = otr2["Grasas"] * p_gr
-            otr2["Proteina"] = otr2["Proteina"] * p_gr
-            otr2["Carbohidratos"] = otr2["Carbohidratos"] * p_gr
+            otr2 = funciones.alimentos_gr(otr2, p_gr)
             st.write(otr2)
 
 
@@ -1007,10 +905,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de otros?', 0, 500)
             p_gr= gr/100
             otr3 = pd.DataFrame(get.buscar_alimento_usuario(otros3))
-            otr2["Energia(kcal)"] = otr2["Energia(kcal)"] * p_gr
-            otr2["Grasas"] = otr2["Grasas"] * p_gr
-            otr2["Proteina"] = otr2["Proteina"] * p_gr
-            otr2["Carbohidratos"] = otr2["Carbohidratos"] * p_gr
+            otr3 = funciones.alimentos_gr(otr3, p_gr)
             st.write(otr2)
 
         if linea_otros == "+4" or linea_otros == "+5":
@@ -1021,10 +916,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de otros?', 0, 500)
             p_gr= gr/100
             otr4 = pd.DataFrame(get.buscar_alimento_usuario(otros4))
-            otr4["Energia(kcal)"] = otr4["Energia(kcal)"] * p_gr
-            otr4["Grasas"] = otr4["Grasas"] * p_gr
-            otr4["Proteina"] = otr4["Proteina"] * p_gr
-            otr4["Carbohidratos"] = otr4["Carbohidratos"] * p_gr
+            otr4 = funciones.alimentos_gr(otr4, p_gr)
             st.write(otr4)
 
         if linea_otros == "+5":
@@ -1035,10 +927,7 @@ if menu_choice == "Home":
             gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de otros?', 0, 500)
             p_gr= gr/100
             otr5 = pd.DataFrame(get.buscar_alimento_usuario(otros5))
-            otr5["Energia(kcal)"] = otr5["Energia(kcal)"] * p_gr
-            otr5["Grasas"] = otr5["Grasas"] * p_gr
-            otr5["Proteina"] = otr5["Proteina"] * p_gr
-            otr5["Carbohidratos"] = otr5["Carbohidratos"] * p_gr
+            otr5 = funciones.alimentos_gr(otr5, p_gr)
             st.write(otr5)
 
         if linea_otros != "0":
@@ -1058,7 +947,7 @@ if menu_choice == "Home":
     if linea_desayuno != "0" or linea_comida != "0" or linea_cena != "0" or linea_otros != "0":
         alimentos_dia = funciones.concatenar(comida, desayuno, cena, otros)
 
-    st.write("Estos son todos los alimentos que vas a tomar hoy:", alimentos_dia)
+        st.write("Estos son todos los alimentos que vas a tomar hoy:", alimentos_dia)
 
 
     st.write("¿Te gustaría poder ir almacenando tus comidas diarias? Haz click en SignUp en el Menu de la izquierda")

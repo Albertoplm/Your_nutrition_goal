@@ -1,6 +1,8 @@
 from configuration import db, collection, collection2
 import numpy as np
 import pandas as pd
+import streamlit as st
+
 
 
 def media_historico(usuario):
@@ -31,32 +33,42 @@ def dias_comida(usuario):
     return len(meal_lis)
 
 def evolucion_PyG(usuario):
-    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
-    weight_lis = a[0]['weight']
-    n = len(weight_lis)-1
-    lis = []
-    for i in range(n):
-            b = weight_lis[i]
-            lis.append(b)
-    lis
-    peso = []
-    for i in lis:
-        peso.append(i[1])
-    return peso
+    try:
+        a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
+        weight_lis = a[0]['weight']
+        n = len(weight_lis)
+        lis = []
+        for i in range(n):
+                b = weight_lis[i]
+                lis.append(b)
+        lis
+        peso = []
+        for i in lis:
+            peso.append(i[1])
+        return peso
+    except KeyError:
+        b = "No has introducido ningún dato todavia"
+        return st.write(b)
 
+        
 def evolucion_peso(usuario):
-    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
-    weight_lis = a[0]['weight']
-    n = len(weight_lis)-1
-    lis = []
-    for i in range(n):
-            b = weight_lis[i]
-            lis.append(b)
-    lis
-    peso = []
-    for i in lis:
-        peso.append(i[0])
-    return peso
+    try:
+        a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
+        weight_lis = a[0]['weight']
+        n = len(weight_lis)
+        lis = []
+        for i in range(n):
+                b = weight_lis[i]
+                lis.append(b)
+        lis
+        peso = []
+        for i in lis:
+            peso.append(i[0])
+        return peso
+    except KeyError:
+        b = "No has introducido ningún dato todavia"
+        return st.write(b)
+
 
 def añadir_comdias_dia_total(usuario, alimentos_dia):
     """
@@ -90,6 +102,23 @@ def añadir_usuario(usuario, contraseña):
     mydict = {"nombre": usuario, "contraseña": contraseña}
     x = collection2.insert_one(mydict)
     return "Useruario añadido"
+
+def change_password(usuario, contraseña):
+    """
+    Function that returns all authors from the database
+    """
+    key = {"nombre": usuario}
+    mydict = {'$set': {"contraseña": contraseña}}
+    x = collection2.update(key,mydict, upsert=False)
+    return "Contraseña cambiada correctamente"
+
+def informacion_sesion(usuario, contraseña):
+    """
+    Function that returns all authors from the database
+    """
+    query = {"nombre": usuario, "contraseña": contraseña}
+    informacion_usuario = list(collection2.find(query, {"_id": 0, "nombre":1, "contraseña":1}))
+    return informacion_usuario
 
 def iniciar_sesion(usuario, contraseña):
     """
