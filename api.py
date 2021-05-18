@@ -3,7 +3,7 @@ import streamlit as st
 from tools.configuration import db, collection, collection2
 import tools.getdata as get
 import pandas as pd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import altair as alt
 from PIL import Image
 import tools.funciones as funciones
