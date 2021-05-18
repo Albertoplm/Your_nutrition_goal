@@ -3,7 +3,7 @@ import os
 from pymongo import MongoClient
 import dns
 
-dotenv.load_dotenv()
+#dotenv.load_dotenv()
 
 #dburl = os.getenv("URL")
 dburl = "mongodb+srv://dbuser:api2021@cluster0.q59hz.mongodb.net/nutrition"
