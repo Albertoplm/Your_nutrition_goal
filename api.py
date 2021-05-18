@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import altair as alt
 from PIL import Image
+import tools.funciones as funciones
 
 
 menu = ["Home", "Login", "SignUp"]
@@ -457,8 +458,8 @@ if menu_choice == "Login":
                     st.write(total)
 
 
-                if linea_desayuno != "0" and linea_comida != "0" and linea_cena != "0" and linea_otros != "0":
-                    alimentos_dia = pd.concat([desayuno,comida,cena,otros])
+                if linea_desayuno != "0" or linea_comida != "0" or linea_cena != "0" or linea_otros != "0":
+                    alimentos_dia = funciones.concatenar(comida, desayuno, cena, otros)
                     st.write("Estos son todos los alimentos que vas a tomar hoy:", alimentos_dia)
                     alimentos = []
                     for x in alimentos_dia["Nombre"]:
@@ -637,7 +638,10 @@ if menu_choice == "Home":
     suma_macros_comida = 0
     suma_macros_cena = 0
     suma_macros_otros = 0
-
+    desayuno = 0
+    comida = 0
+    cena = 0
+    otros = 0
     #DESAYUNO
 
     st.subheader("Desayuno")
@@ -848,7 +852,9 @@ if menu_choice == "Home":
     #CENA
 
     st.subheader("Cena")
+    
     if st.checkbox("¿Quieres añadir alimentos para la cena?"):
+        
         mas = ["0","+1", "+2", "+3", "+4", "+5"]
         linea_cena = st.radio(
             '¿Cuantos alimentos deseas añadir a la cena?',
@@ -860,7 +866,7 @@ if menu_choice == "Home":
         cena3 = 0 
         cena4 = 0 
         cena5 = 0
-
+    
 
         if linea_cena == "+1" or linea_cena == "+2" or linea_cena == "+3" or linea_cena == "+4" or linea_cena == "+5":
             cena1 = st.selectbox(
@@ -1049,9 +1055,10 @@ if menu_choice == "Home":
         total = suma_macros_desayuno+suma_macros_comida+suma_macros_cena+suma_macros_otros
         st.subheader("La suma total de las kcal para todo el día son:")
         st.write(total)
-    if linea_desayuno != "0" and linea_comida != "0" and linea_cena != "0" and linea_otros != "0":
-        alimentos_dia = pd.concat([desayuno,comida,cena,otros])
-        st.write("Estos son todos los alimentos que vas a tomar hoy:", alimentos_dia)
+    if linea_desayuno != "0" or linea_comida != "0" or linea_cena != "0" or linea_otros != "0":
+        alimentos_dia = funciones.concatenar(comida, desayuno, cena, otros)
+
+    st.write("Estos son todos los alimentos que vas a tomar hoy:", alimentos_dia)
 
 
     st.write("¿Te gustaría poder ir almacenando tus comidas diarias? Haz click en SignUp en el Menu de la izquierda")
