@@ -1,5 +1,62 @@
 from configuration import db, collection, collection2
+import numpy as np
+import pandas as pd
 
+
+def media_historico(usuario):
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal": 1}))
+    meal_lis = a[0]['meal']
+    n = len(meal_lis)
+    energia = []
+    grasas = []
+    proteina = []
+    carbohidratos = []
+    for n2 in range(n):
+        for n3 in range(len(meal_lis[n2])):
+            energia.append(meal_lis[n2][n3]["Energia(kcal)"])
+            grasas.append(meal_lis[n2][n3]["Grasas"])
+            proteina.append(meal_lis[n2][n3]["Proteina"])
+            carbohidratos.append(meal_lis[n2][n3]["Carbohidratos"])
+    data = {
+        'Energia(kcal)': round(np.mean(energia)),
+        'Grasas': round(np.mean(grasas)),
+        'Proteina': round(np.mean(proteina)),
+        'Carbohidratos': round(np.mean(carbohidratos))}
+    data1 = pd.DataFrame(list(data.items()), columns = ['Macronutrientes','Media'])
+    return data1
+
+def dias_comida(usuario):
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal": 1}))
+    meal_lis = a[0]['meal']
+    return len(meal_lis)
+
+def evolucion_PyG(usuario):
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
+    weight_lis = a[0]['weight']
+    n = len(weight_lis)-1
+    lis = []
+    for i in range(n):
+            b = weight_lis[i]
+            lis.append(b)
+    lis
+    peso = []
+    for i in lis:
+        peso.append(i[1])
+    return peso
+
+def evolucion_peso(usuario):
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight": 1}))
+    weight_lis = a[0]['weight']
+    n = len(weight_lis)-1
+    lis = []
+    for i in range(n):
+            b = weight_lis[i]
+            lis.append(b)
+    lis
+    peso = []
+    for i in lis:
+        peso.append(i[0])
+    return peso
 
 def añadir_comdias_dia_total(usuario, alimentos_dia):
     """
@@ -7,6 +64,22 @@ def añadir_comdias_dia_total(usuario, alimentos_dia):
     """
     meal = alimentos_dia
     x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"meal": meal}}, upsert=False) 
+    return x
+
+def añadir_peso_semanal(usuario, peso, cambio):
+    """
+    Function that returns all authors from the database
+    """
+    weight = [peso, cambio]
+    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"weight": weight}}, upsert=False) 
+    return "Sus datos han sido añadidos"
+
+
+def comprobar_usuario(usuario):
+    """
+    Function that returns all authors from the database
+    """
+    x = list(collection2.find({"nombre": usuario}, {"_id": 0, "nombre": 1}))
     return x
 
 
