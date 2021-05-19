@@ -1,8 +1,7 @@
 ![portada](https://github.com/Albertoplm/Your_nutrition_goal/blob/main/images/Portada.JPG)
 
-# Your nutrition goal
 
-App to find the perfect nutrition plan to achieve your fitness goal
+**App to find the perfect nutrition plan to achieve your fitness goal**
 
 ## Kcal calculator
 
