@@ -8,7 +8,6 @@ from PIL import Image
 import tools.funciones as funciones
 #from mplsoccer import Radar, FontManager
 import matplotlib.pyplot as plt
-import plotly_express as px
 import seaborn as sns
 
 
