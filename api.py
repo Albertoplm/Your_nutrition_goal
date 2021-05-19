@@ -10,7 +10,7 @@ import tools.funciones as funciones
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-st.set_page_config(page_title="Your nutrition plan", page_icon="🏋🏽‍♀️", layout='centered', initial_sidebar_state='auto')
+st.set_page_config(page_title="Your nutrition goal", page_icon="⚡", layout='centered', initial_sidebar_state='auto')
 
 menu = ["Home", "Login", "SignUp"]
 menu_choice = st.sidebar.selectbox('Menu', menu)
