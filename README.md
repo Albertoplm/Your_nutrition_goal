@@ -33,7 +33,7 @@ You will see your username and password, and also you have the possibility to ch
 
 ## Tech used:
 
-Scrapping (Selenium)
-Mongo
-Streamlit
-Heroku
+- Scrapping (Selenium)
+- Mongo
+- Streamlit
+- Heroku
