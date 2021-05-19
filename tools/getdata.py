@@ -3,6 +3,22 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+def top_alimentos(usuario):
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal": 1}))
+    meal_lis = a[0]['meal']
+    n = len(meal_lis)
+    lis = []
+    for i in range(n):
+            b = meal_lis[i]
+            lis.append(b)
+    peso = []
+    for i in lis:
+        for i1 in range(len(i)):
+            peso.append(i[i1]["Nombre"])
+    peso = pd.DataFrame(peso)
+    count = peso.value_counts()
+    top = count.head(10)
+    return top
 
 
 def media_historico(usuario):

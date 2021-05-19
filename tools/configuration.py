@@ -6,7 +6,7 @@ import dns
 #dotenv.load_dotenv()
 
 #dburl = os.getenv("URL")
-dburl = "mongodb+srv://dbuser:api2021@cluster0.q59hz.mongodb.net/nutrition"
+dburl = 'mongodb+srv://dbuser:api2021@cluster0.q59hz.mongodb.net/nutrition'
 print(dburl)
 if not dburl:
     raise ValueError("no tienes url mongodb")

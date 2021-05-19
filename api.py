@@ -3,10 +3,13 @@ import streamlit as st
 from tools.configuration import db, collection, collection2
 import tools.getdata as get
 import pandas as pd
-#import matplotlib.pyplot as plt
 import altair as alt
 from PIL import Image
 import tools.funciones as funciones
+#from mplsoccer import Radar, FontManager
+import matplotlib.pyplot as plt
+import plotly_express as px
+import seaborn as sns
 
 
 menu = ["Home", "Login", "SignUp"]
@@ -425,18 +428,20 @@ if menu_choice == "Login":
 
                 st.subheader("Evolución de tu peso:")
                 evolucion_peso = get.evolucion_peso(username)
-                st.bar_chart(data=evolucion_peso)
+                st.area_chart(data=evolucion_peso)
                 st.subheader("Gráfico perdidas y ganancias de peso:")
                 evolucion_PyG = get.evolucion_PyG(username)
                 st.bar_chart(data=evolucion_PyG)
                 st.write("Llevas",get.dias_comida(username), "días en los que has introducido tus comidas")
                 st.write("Tu media de macronutrientes ha sido de:", get.media_historico(username))
                 media = get.media_historico(username)
-                media = alt.Chart(media).mark_circle().encode(x='Macronutrientes', y='Media', tooltip=['Macronutrientes', 'Media'])
-                st.altair_chart(media, use_container_width=True)
-                #Añadir resutados por semana. DONE
-                #Añadir número de días que ha introducido información
-                #Media de kcal ingeridas
+                fig, ax = plt.subplots(figsize=(10, 5))
+                ax1 = plt.barh('Macronutrientes','Media', data=media, align='center', alpha=0.5)
+                st.pyplot(fig)
+                top = get.top_alimentos(username)
+                st.subheader("Top 10 alimentos:")
+                st.write(top)
+
                 #Gráfico kcal ingeridas por día
 
             elif task == ("Perfil"):
@@ -496,13 +501,13 @@ if menu_choice == "Home":
     'Has seleccionado: ', sexo
 
     #select slider to choose age
-    edad = st.slider('¿Cual es tu edad?', 0, 100)
+    edad = st.slider('¿Cuál es tu edad?', 0, 100)
 
     #select slider to choose weight
-    peso = st.slider('¿Cual es su peso actual?', 0.0, 150.0)
+    peso = st.slider('¿Cuál es su peso actual?', 0.0, 150.0)
 
     #select slider to choose height
-    estatura = st.slider('¿Cual es tu estatura actual en cm?', 0, 250)
+    estatura = st.slider('¿Cuál es tu estatura actual en cm?', 0, 250)
 
     st.write("Has seleccionado:", edad, "años", peso, "kg", estatura, "cm")
 
@@ -510,30 +515,34 @@ if menu_choice == "Home":
     if sexo == "Hombre":
         TMBH = 66 + (13.7 * (peso)) + (5 * (estatura)) - (6.75 * (edad))
         if objetivo == "Perder peso":
-            perdida = st.slider('¿Cuantos kg deseas perder?', 0.0, 50.0)
-            st.write("Tu cuerpo consume", round(TMBH), "kcal en reposo, sin hacer nada por lo tanto. Debes consumir", round(TMBH*1.2 - 1000),"al día para perder", perdida ,"kg en ",round(perdida*7),
+            perdida = st.slider('¿Cuántos kg deseas perder?', 0.0, 50.0)
+            st.write("Este seria tu peso final:", peso - perdida)
+            st.write("Tu cuerpo consume", round(TMBH), "kcal en reposo, sin hacer nada, por lo tanto, debes consumir", round(TMBH*1.2 - 1000),"al día para perder", perdida ,"kg en ",round(perdida*7),
             " días (Se recomienda no perder más de un kilo por semana). En el caso de realizar deporte deberás sumarle esas kcal extra, es decir kcal extra +" , round(TMBH*1.2 - 1000))
         if objetivo == "Ganar masa muscular":
-            ganancia = st.slider('¿Cuantos kg deseas ganar?', 0.0, 50.0)
-            st.write("Tu cuerpo consume", round(TMBH), "kcal en reposo, sin hacer nada por lo tanto. Debes consumir", round(TMBH*1.2 + 500),"al día para ganar", ganancia ,"kg en ",round((ganancia*2)*7),
+            ganancia = st.slider('¿Cuántos kg deseas ganar?', 0.0, 50.0)
+            st.write("Este seria tu peso final:", peso + ganancia)
+            st.write("Tu cuerpo consume", round(TMBH), "kcal en reposo, sin hacer nada, por lo tanto, debes consumir", round(TMBH*1.2 + 500),"al día para ganar", ganancia ,"kg en ",round((ganancia*2)*7),
             " días (Se recomienda no ganar más de medio kilo por semana). En el caso de realizar deporte deberás sumarle esas kcal extra, es decir kcal extra +" , round(TMBH*1.2 + 500))
     elif sexo == "Mujer":
         TMBM = 655 + (9.6 * peso) + (1.8 * estatura) - (4.7 * edad)
         if objetivo == "Perder peso":
-            perdida = st.slider('¿Cuantos kg deseas perder?', 0.0, 50.0)
-            st.write("Tu cuerpo consume", round(TMBM), "kcal en reposo, sin hacer nada por lo tanto. Debes consumir", round(TMBM*1.2 - 1000),"al día para perder", perdida ,"kg en ",round(perdida*7),
+            perdida = st.slider('¿Cuántos kg deseas perder?', 0.0, 50.0)
+            st.write("Este seria tu peso final:", peso - perdida)
+            st.write("Tu cuerpo consume", round(TMBM), "kcal en reposo, sin hacer nada, por lo tanto, debes consumir", round(TMBM*1.2 - 1000),"al día para perder", perdida ,"kg en ",round(perdida*7),
             " días (Se recomienda no perder más de un kilo por semana). En el caso de realizar deporte deberás sumarle esas kcal extra, es decir kcal extra +" , round(TMBM*1.2 - 1000))
         if objetivo == "Ganar masa muscular":
-            ganancia = st.slider('¿Cuantos kg deseas ganar?', 0.0, 100.0)
-            st.write("Tu cuerpo consume", round(TMBM), "kcal en reposo, sin hacer nada por lo tanto. Debes consumir", round(TMBM*1.2 + 500),"al día para ganar", ganancia ,"kg en ",round((ganancia*2)*7),
+            ganancia = st.slider('¿Cuántos kg deseas ganar?', 0.0, 100.0)
+            st.write("Este seria tu peso final:", peso + ganancia)
+            st.write("Tu cuerpo consume", round(TMBM), "kcal en reposo, sin hacer nada, por lo tanto, debes consumir", round(TMBM*1.2 + 500),"al día para ganar", ganancia ,"kg en ",round((ganancia*2)*7),
             " días (Se recomienda no ganar más de medio kilo por semana). En el caso de realizar deporte deberás sumarle esas kcal extra, es decir kcal extra +" , round(TMBM*1.2 + 500))
 
     #Macros
     #st.write("<h1 style='text-align: center; color: black; font-size: medium'>Ahora que ya conoces cuantas kcal debes consumir al día para cumplir tu objetivo, quieres dar un paso más para mejorar tu alimentación??</h1>", unsafe_allow_html=True)
     st.subheader("Ahora que ya conoces cuantas kcal debes consumir al día para cumplir tu objetivo, ¿quieres dar un paso más para mejorar tu alimentación?")
-    st.write("<h1 style='text-align: center; color: black; font-size: medium'>Que son las macros??</h1>", unsafe_allow_html=True)
+    st.write("<h1 style='text-align: center; color: black; font-size: medium'>¿Que son las macros??</h1>", unsafe_allow_html=True)
 
-    st.write("Los macros no son otra cosa que los macronutrientes, los grupos de alimentos que nuestro cuerpo necesita para vivir: los carbohidratos, las proteínas y las grasas. Todos ellos contienen micronutrientes, es decir vitaminas y minerales. La dieta de los macros o dieta flexible propone adelgazar o mantener el peso controlando los gramos de macronutrientes que ingerimos diariamente ¡Vamos con ello!")
+    st.write("Los macros no son otra cosa que los macronutrientes, los grupos de alimentos que nuestro cuerpo necesita para vivir: los carbohidratos, las proteínas y las grasas. Todos ellos contienen micronutrientes, es decir, vitaminas y minerales. La dieta de los macros o dieta flexible propone adelgazar o mantener el peso controlando los gramos de macronutrientes que ingerimos diariamente ¡Vamos a ello!")
 
     if sexo == "Hombre":
         if objetivo == "Perder peso":
@@ -618,7 +627,7 @@ if menu_choice == "Home":
                 'Seleccione alimento:',
                 alimentos)
             'Has seleccionado: ', desayuno1
-            gr = st.slider('¿Cual es la cantidad en gramos?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos?', 0, 500)
             p_gr= gr/100
             des1 = pd.DataFrame(get.buscar_alimento_usuario(desayuno1))
             des1 = funciones.alimentos_gr(des1, p_gr)
@@ -631,7 +640,7 @@ if menu_choice == "Home":
             'Seleccione el segundo alimento',
             alimentos)
             'Has seleccionado: ', desayuno2
-            gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el segundo alimento?', 0, 500)
             p_gr= gr/100
             des2 = pd.DataFrame(get.buscar_alimento_usuario(desayuno2))
             des2 = funciones.alimentos_gr(des2, p_gr)
@@ -643,7 +652,7 @@ if menu_choice == "Home":
             'Seleccione el tercero alimento',
             alimentos)
             'Has seleccionado: ', desayuno3
-            gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el tercer alimento?', 0, 500)
             p_gr= gr/100
             des3 = pd.DataFrame(get.buscar_alimento_usuario(desayuno3))
             des3 = funciones.alimentos_gr(des3, p_gr)
@@ -654,7 +663,7 @@ if menu_choice == "Home":
             'Seleccione el cuarto alimento',
             alimentos)
             'Has seleccionado: ', desayuno4
-            gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el cuarto alimento?', 0, 500)
             p_gr= gr/100
             des4 = pd.DataFrame(get.buscar_alimento_usuario(desayuno4))
             des4 = funciones.alimentos_gr(des4, p_gr)
@@ -665,7 +674,7 @@ if menu_choice == "Home":
             'Seleccione el quinto alimento',
             alimentos)
             'Has seleccionado: ', desayuno5
-            gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el quinto alimento?', 0, 500)
             p_gr= gr/100
             des5 = pd.DataFrame(get.buscar_alimento_usuario(desayuno5))
             des5 = funciones.alimentos_gr(des5, p_gr)
@@ -705,7 +714,7 @@ if menu_choice == "Home":
                 'Seleccione alimento para la comida:',
                 alimentos)
             'Has seleccionado: ', comida1
-            gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la comida?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para este alimento de la comida?', 0, 500)
             p_gr= gr/100
             com1 = pd.DataFrame(get.buscar_alimento_usuario(comida1))
             com1 = funciones.alimentos_gr(com1, p_gr)
@@ -718,7 +727,7 @@ if menu_choice == "Home":
             'Seleccione el segundo alimento para la comida',
             alimentos)
             'Has seleccionado: ', comida2
-            gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la comida?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el segundo alimento de la comida?', 0, 500)
             p_gr= gr/100
             com2 = pd.DataFrame(get.buscar_alimento_usuario(comida2))
             com2 = funciones.alimentos_gr(com2, p_gr)
@@ -730,7 +739,7 @@ if menu_choice == "Home":
             'Seleccione el tercero alimento para la comida',
             alimentos)
             'Has seleccionado: ', comida3
-            gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la comida?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el tercer alimento de la comida?', 0, 500)
             p_gr= gr/100
             com3 = pd.DataFrame(get.buscar_alimento_usuario(comida3))
             com3 = funciones.alimentos_gr(com3, p_gr)
@@ -741,7 +750,7 @@ if menu_choice == "Home":
             'Seleccione el cuarto alimento para la comida',
             alimentos)
             'Has seleccionado: ', comida4
-            gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la comida?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el cuarto alimento de la comida?', 0, 500)
             p_gr= gr/100
             com4 = pd.DataFrame(get.buscar_alimento_usuario(comida4))
             com4 = funciones.alimentos_gr(com4, p_gr)
@@ -752,7 +761,7 @@ if menu_choice == "Home":
             'Seleccione el quinto alimento para la comida',
             alimentos)
             'Has seleccionado: ', comida5
-            gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la comida?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el quinto alimento de la comida?', 0, 500)
             p_gr= gr/100
             com5 = pd.DataFrame(get.buscar_alimento_usuario(comida5))
             com5 = funciones.alimentos_gr(com5, p_gr)
@@ -792,7 +801,7 @@ if menu_choice == "Home":
                 'Seleccione alimento para la cena:',
                 alimentos)
             'Has seleccionado: ', cena1
-            gr = st.slider('¿Cual es la cantidad en gramos para este alimento de la cena?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para este alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen1 = pd.DataFrame(get.buscar_alimento_usuario(cena1))
             cen1 = funciones.alimentos_gr(cen1, p_gr)
@@ -805,7 +814,7 @@ if menu_choice == "Home":
             'Seleccione el segundo alimento para la cena',
             alimentos)
             'Has seleccionado: ', cena2
-            gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de la cena?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el segundo alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen2 = pd.DataFrame(get.buscar_alimento_usuario(cena2))
             cen2 = funciones.alimentos_gr(cen2, p_gr)
@@ -817,7 +826,7 @@ if menu_choice == "Home":
             'Seleccione el tercero alimento para la cena',
             alimentos)
             'Has seleccionado: ', cena3
-            gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de la cena?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el tercer alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen3 = pd.DataFrame(get.buscar_alimento_usuario(cena3))
             cen3 = funciones.alimentos_gr(cen3, p_gr)
@@ -828,7 +837,7 @@ if menu_choice == "Home":
             'Seleccione el cuarto alimento para la cena',
             alimentos)
             'Has seleccionado: ', cena4
-            gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de la cena?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el cuarto alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen4 = pd.DataFrame(get.buscar_alimento_usuario(cena4))
             cen4 = funciones.alimentos_gr(cen4, p_gr)
@@ -839,7 +848,7 @@ if menu_choice == "Home":
             'Seleccione el quinto alimento para la cena',
             alimentos)
             'Has seleccionado: ', cena5
-            gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de la cena?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el quinto alimento de la cena?', 0, 500)
             p_gr= gr/100
             cen5 = pd.DataFrame(get.buscar_alimento_usuario(cena5))
             cen5 = funciones.alimentos_gr(cen5, p_gr)
@@ -877,7 +886,7 @@ if menu_choice == "Home":
                 'Seleccione alimento para otros:',
                 alimentos)
             'Has seleccionado: ', otros1
-            gr = st.slider('¿Cual es la cantidad en para este alimento de otros?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en para este alimento de otros?', 0, 500)
             p_gr= gr/100
             otr1 = pd.DataFrame(get.buscar_alimento_usuario(otros1))
             otr1 = funciones.alimentos_gr(otr1, p_gr)
@@ -890,7 +899,7 @@ if menu_choice == "Home":
             'Seleccione el segundo alimento para otros',
             alimentos)
             'Has seleccionado: ', otros2
-            gr = st.slider('¿Cual es la cantidad en gramos para el segundo alimento de otros?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el segundo alimento de otros?', 0, 500)
             p_gr= gr/100
             otr2 = pd.DataFrame(get.buscar_alimento_usuario(otros2))
             otr2 = funciones.alimentos_gr(otr2, p_gr)
@@ -902,7 +911,7 @@ if menu_choice == "Home":
             'Seleccione el tercero alimento para otros',
             alimentos)
             'Has seleccionado: ', otros3
-            gr = st.slider('¿Cual es la cantidad en gramos para el tercer alimento de otros?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el tercer alimento de otros?', 0, 500)
             p_gr= gr/100
             otr3 = pd.DataFrame(get.buscar_alimento_usuario(otros3))
             otr3 = funciones.alimentos_gr(otr3, p_gr)
@@ -913,7 +922,7 @@ if menu_choice == "Home":
             'Seleccione el cuarto alimento para otros',
             alimentos)
             'Has seleccionado: ', otros4
-            gr = st.slider('¿Cual es la cantidad en gramos para el cuarto alimento de otros?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el cuarto alimento de otros?', 0, 500)
             p_gr= gr/100
             otr4 = pd.DataFrame(get.buscar_alimento_usuario(otros4))
             otr4 = funciones.alimentos_gr(otr4, p_gr)
@@ -924,7 +933,7 @@ if menu_choice == "Home":
             'Seleccione el quinto alimento para otros',
             alimentos)
             'Has seleccionado: ', otros5
-            gr = st.slider('¿Cual es la cantidad en gramos para el quinto alimento de otros?', 0, 500)
+            gr = st.slider('¿Cuál es la cantidad en gramos para el quinto alimento de otros?', 0, 500)
             p_gr= gr/100
             otr5 = pd.DataFrame(get.buscar_alimento_usuario(otros5))
             otr5 = funciones.alimentos_gr(otr5, p_gr)
