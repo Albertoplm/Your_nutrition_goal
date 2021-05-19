@@ -31,3 +31,9 @@ You can add your weight changes and also you will see some stats of your daily f
 
 You will see your username and password, and also you have the possibility to change it
 
+## Tech used:
+
+Scrapping (Selenium)
+Mongo
+Streamlit
+Heroku
