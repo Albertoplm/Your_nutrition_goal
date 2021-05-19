@@ -10,6 +10,7 @@ import tools.funciones as funciones
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+st.set_page_config(page_title="Your nutrition plan", page_icon="🏋🏽‍♀️", layout='centered', initial_sidebar_state='auto')
 
 menu = ["Home", "Login", "SignUp"]
 menu_choice = st.sidebar.selectbox('Menu', menu)
@@ -545,26 +546,30 @@ if menu_choice == "Home":
 
     if sexo == "Hombre":
         if objetivo == "Perder peso":
-            st.write("Kcal totales", round(TMBH))
-            st.write("Proteinas entre:", round(TMBH*0.25), "y", round(TMBH*0.35), "de las kcal totales")
-            st.write("Carbohidratos entre:", round(TMBH*0.35), "y" ,round(TMBH*0.45), "de las kcal totales")
-            st.write("Grasas entre:", round(TMBH*0.15), "y" ,round(TMBH*0.25), "de las kcal totales")
+            kcal_c = (TMBH*1.2 - 1000)
+            st.write("Kcal totales", round(kcal_c))
+            st.write("Proteinas entre:", round(kcal_c*0.25), "y", round(kcal_c*0.35), "de las kcal totales")
+            st.write("Carbohidratos entre:", round(kcal_c*0.35), "y" ,round(kcal_c*0.45), "de las kcal totales")
+            st.write("Grasas entre:", round(kcal_c*0.15), "y" ,round(kcal_c*0.25), "de las kcal totales")
         if objetivo == "Ganar masa muscular":
-            st.write("Kcal totales", round(TMBH))
-            st.write("Proteinas entre:", round(TMBH*0.20), "y", round(TMBH*0.25), "de las kcal totales")
-            st.write("Carbohidratos entre:", round(TMBH*0.50), "y" ,round(TMBH*0.55), "de las kcal totales")
-            st.write("Grasas entre:", round(TMBH*0.25) ,"y" ,round(TMBH*0.30), "de las kcal totales")
+            kcal_c = (TMBH*1.2 + 500)
+            st.write("Kcal totales", round(kcal_c*1.2 + 500))
+            st.write("Proteinas entre:", round(kcal_c*0.20), "y", round(kcal_c*0.25), "de las kcal totales")
+            st.write("Carbohidratos entre:", round(kcal_c*0.50), "y" ,round(kcal_c*0.55), "de las kcal totales")
+            st.write("Grasas entre:", round(kcal_c*0.25) ,"y" ,round(kcal_c*0.30), "de las kcal totales")
     if sexo == "Mujer":
         if objetivo == "Perder peso":
-            st.write("Kcal totales", round(TMBM))
-            st.write("Proteinas entre:", round(TMBM*0.25), "y", round(TMBM*0.35), "de las kcal totales")
-            st.write("Carbohidratos entre:", round(TMBM*0.35), "y" ,round(TMBM*0.45), "de las kcal totales")
-            st.write("Grasas entre:", round(TMBM*0.15), "y" ,round(TMBM*0.25), "de las kcal totales")
+            kcal_c = (TMBM*1.2 - 1000)
+            st.write("Kcal totales", round(kcal_c*1.2 - 1000))
+            st.write("Proteinas entre:", round(kcal_c*0.25), "y", round(kcal_c*0.35), "de las kcal totales")
+            st.write("Carbohidratos entre:", round(kcal_c*0.35), "y" ,round(kcal_c*0.45), "de las kcal totales")
+            st.write("Grasas entre:", round(kcal_c*0.15), "y" ,round(kcal_c*0.25), "de las kcal totales")
         if objetivo == "Ganar masa muscular":
-            st.write("Kcal totales", round(TMBM))
-            st.write("Proteinas entre:", round(TMBM*0.20), "y", round(TMBM*0.25), "de las kcal totales")
-            st.write("Carbohidratos entre:", round(TMBM*0.50), "y" ,round(TMBM*0.55), "de las kcal totales")
-            st.write("Grasas entre:", round(TMBM*0.25) ,"y" ,round(TMBM*0.30), "de las kcal totales")
+            kcal_c = (TMBM*1.2 - 500)
+            st.write("Kcal totales", round(kcal_c*1.2 + 500))
+            st.write("Proteinas entre:", round(kcal_c*0.20), "y", round(kcal_c*0.25), "de las kcal totales")
+            st.write("Carbohidratos entre:", round(kcal_c*0.50), "y" ,round(kcal_c*0.55), "de las kcal totales")
+            st.write("Grasas entre:", round(kcal_c*0.25) ,"y" ,round(kcal_c*0.30), "de las kcal totales")
 
     #st.write("<h1 style='text-align: center; color: black; font-size: medium'>Para ayudarte a cumplir tu objetivo te facilitamos acceso a nuestra lista de alimentos con su información nutricional x 100gr</h1>", unsafe_allow_html=True)
     st.subheader("Para ayudarte a cumplir tu objetivo te facilitamos acceso a nuestra lista de alimentos con su información nutricional x 100gr")
