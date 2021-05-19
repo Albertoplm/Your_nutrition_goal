@@ -1,4 +1,4 @@
-![portada](https://github.com/Albertoplm/Your_nutrition_goal/blob/master/images/Portada.JPG)
+![portada](https://github.com/Albertoplm/Your_nutrition_goal/blob/main/images/Portada.JPG)
 
 # Your nutrition goal
 
