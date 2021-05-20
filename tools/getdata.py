@@ -2,6 +2,46 @@ from configuration import db, collection, collection2
 import numpy as np
 import pandas as pd
 import streamlit as st
+from datetime import datetime
+
+def meal_date(usuario):
+    '''Esta función recibe el usuario y devuelve los días'''
+
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal_date": 1}))
+    date_lis = a[0]['date']
+    date = []
+    for a in list(date_lis):
+        date.append(str(a).split()[0])
+    return date
+
+def weight_date(usuario):
+    '''Esta función recibe el usuario y devuelve los días'''
+
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "weight_date": 1}))
+    date_lis = a[0]['date']
+    date = []
+    for a in list(date_lis):
+        date.append(str(a).split()[0])
+    return date
+
+def kcal_totalesxdia(usuario):
+    '''Esta función recibe el usuario y devuelve las calorías por día'''
+
+    a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal": 1}))
+    meal_lis = a[0]['meal']
+    n = len(meal_lis)
+    lis = []
+    suma = 0
+    lis2 = []
+    for i in range(n):
+        b = meal_lis[i]
+        for j in b:
+            suma = suma + j['Energia(kcal)']
+        lis.append(round(suma))
+    for n in range(0,len(lis)-1):
+        lis2.append(lis[0])
+        lis2.append(lis[n+1]-lis[n])
+    return lis2
 
 def top_alimentos(usuario):
     a = list(collection2.find({"nombre": usuario}, {"_id": 0, "meal": 1}))
@@ -91,7 +131,7 @@ def añadir_comdias_dia_total(usuario, alimentos_dia):
     Function that returns all authors from the database
     """
     meal = alimentos_dia
-    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"meal": meal}}, upsert=False) 
+    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"meal": meal, "meal_date": datetime.now()}}, upsert=False) 
     return x
 
 def añadir_peso_semanal(usuario, peso, cambio):
@@ -99,7 +139,7 @@ def añadir_peso_semanal(usuario, peso, cambio):
     Function that returns all authors from the database
     """
     weight = [peso, cambio]
-    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"weight": weight}}, upsert=False) 
+    x = collection2.find_one_and_update({"nombre": usuario}, {"$push": {"weight": weight, "weight_date": datetime.now()}}, upsert=False) 
     return "Sus datos han sido añadidos"
 
 
