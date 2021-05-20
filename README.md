@@ -3,7 +3,7 @@
 
 **App to find the perfect nutrition plan to achieve your fitness goal**
 
-    Click [here](https://your-nutrition-goal-app.herokuapp.com/) to go to the app 
+[Click here to go to the app](https://your-nutrition-goal-app.herokuapp.com/)
 
 ## Kcal calculator 🖩
 
