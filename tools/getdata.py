@@ -38,8 +38,8 @@ def kcal_totalesxdia(usuario):
         for j in b:
             suma = suma + j['Energia(kcal)']
         lis.append(round(suma))
+    lis2.append(lis[0])
     for n in range(0,len(lis)-1):
-        lis2.append(lis[0])
         lis2.append(lis[n+1]-lis[n])
     return lis2
 
