@@ -31,6 +31,7 @@ if menu_choice == "Login":
                     for k in x:
                         valor = x[k]
                         alimentos.append(valor) 
+                        alimentos.sort(key = str.lower)
 
                 st.subheader("Añade tus comidas")
                 #Defino suma de macros para que no me de error si se pone 0 en algun horario
@@ -563,7 +564,7 @@ if menu_choice == "Home":
     if sexo == "Mujer":
         if objetivo == "Perder peso":
             kcal_c = (TMBM*1.2 - 1000)
-            st.write("Kcal totales", round(kcal_c*1.2 - 1000))
+            st.write("Kcal totales", round(kcal_c*1.2 - 1000, ))
             st.write("Proteinas entre:", round(kcal_c*0.25), "y", round(kcal_c*0.35), "de las kcal totales")
             st.write("Carbohidratos entre:", round(kcal_c*0.35), "y" ,round(kcal_c*0.45), "de las kcal totales")
             st.write("Grasas entre:", round(kcal_c*0.15), "y" ,round(kcal_c*0.25), "de las kcal totales")
@@ -584,6 +585,7 @@ if menu_choice == "Home":
         for k in x:
             valor = x[k]
             alimentos.append(valor)
+            alimentos.sort(key = str.lower)
     alimento = st.selectbox(
         'Seleccione alimento',
         alimentos)
