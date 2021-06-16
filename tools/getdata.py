@@ -69,6 +69,7 @@ def media_historico(usuario):
     grasas = []
     proteina = []
     carbohidratos = []
+    meals_dia= []
     for n2 in range(n):
         for n3 in range(len(meal_lis[n2])):
             energia.append(meal_lis[n2][n3]["Energia(kcal)"])
@@ -76,10 +77,10 @@ def media_historico(usuario):
             proteina.append(meal_lis[n2][n3]["Proteina"])
             carbohidratos.append(meal_lis[n2][n3]["Carbohidratos"])
     data = {
-        'Energia(kcal)': round(np.mean(energia)),
-        'Grasas': round(np.mean(grasas)),
-        'Proteina': round(np.mean(proteina)),
-        'Carbohidratos': round(np.mean(carbohidratos))}
+        'Energia(kcal)': round(sum(energia)/n),
+        'Grasas': round(sum(grasas)/n),
+        'Proteina': round(sum(proteina)/n),
+        'Carbohidratos': round(sum(carbohidratos)/n)}
     data1 = pd.DataFrame(list(data.items()), columns = ['Macronutrientes','Media'])
     return data1
 
